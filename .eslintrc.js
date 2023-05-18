@@ -21,6 +21,7 @@ module.exports = {
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/prefer-nullish-coalescing': 'off',
-    '@typescript-eslint/prefer-optional-chain': 'off'
+    '@typescript-eslint/prefer-optional-chain': 'off',
+    'prefer-regex-literals': 'off'
   }
 }

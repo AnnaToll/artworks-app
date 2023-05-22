@@ -1,7 +1,8 @@
 const Error = ({ error }: { error: string }) => {
-  if (!error) {
-    return null
-  }
+  console.log(error)
+  // if (!error) {
+  //   return null
+  // }
   return (
     <div className="error">{error}</div>
   )

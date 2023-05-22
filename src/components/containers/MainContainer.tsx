@@ -1,8 +1,14 @@
 import { useEffect } from 'react'
 import type { NavObj } from '../../context/Nav.types'
 
-const Main = ({ data, children }: { data: NavObj, children: JSX.Element | JSX.Element[] }) => {
-  useEffect(() => { document.title = data.name }, [data])
+interface MainProps {
+  data?: NavObj
+  title?: string
+  children: JSX.Element | JSX.Element[]
+}
+
+const Main = ({ data, title = 'Måleri', children }: MainProps) => {
+  useEffect(() => { document.title = data?.name || title }, [data])
   return (
     <main>
       {children}

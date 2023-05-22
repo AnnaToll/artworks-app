@@ -8,22 +8,41 @@ const useFetch = (urlEndPoint: string, dataInitState: ResponseTypes = []) => {
 
   useEffect(() => () => {
     setError('')
-  })
+  }, [])
+
+  const getCookie = (name: string) => {
+    let cookieValue = null
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';')
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim()
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+          break
+        }
+      }
+    }
+    return cookieValue
+  }
 
   const baseFetch = async (method: Method = 'GET', body: Record<string, unknown> = {}) => {
     setIsLoading(true)
     setError('')
-    console.log('in fetch')
-    console.log(`${process.env.REACT_APP_SERVER_URL}${urlEndPoint}`)
 
     let returnValue
 
     let fetchSettings = {}
 
     if (method !== 'GET') {
+      const csrftoken = getCookie('csrftoken')
+      console.log(csrftoken)
+
       fetchSettings = {
         method,
+        credentials: 'include',
         headers: {
+          ...(csrftoken && { 'X-CSRFToken': csrftoken }),
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
@@ -33,8 +52,9 @@ const useFetch = (urlEndPoint: string, dataInitState: ResponseTypes = []) => {
 
     try {
       const res = await fetch(`${process.env.REACT_APP_SERVER_URL}${urlEndPoint}`, fetchSettings)
+      console.log(res)
       const data: DataObj = await res.json()
-      // console.log(data)
+      console.log(data)
       if (data.error) {
         setError(data.error)
       } else if (data.success) {
@@ -52,7 +72,7 @@ const useFetch = (urlEndPoint: string, dataInitState: ResponseTypes = []) => {
     baseFetch('GET')
   }
 
-  const fetchPost = (body: Record<string, unknown>) => {
+  const fetchPost = (body: Record<string, unknown> = {}) => {
     baseFetch('POST', body)
   }
 

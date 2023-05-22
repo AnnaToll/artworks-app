@@ -4,6 +4,7 @@ import CategoryPage from './pages/CategoryPage'
 import NotFound from './pages/404'
 import useGetNavObj from '../context/AppContext'
 import TextPage from './pages/TextPage'
+import Admin from './admin/Admin'
 
 const BaseRoutes = () => {
   const nav = useGetNavObj()
@@ -23,6 +24,7 @@ const BaseRoutes = () => {
       <Route path='/' element={<Navigate to={nav[0]?.endpoint} /> || '/'} />
       { dynamicRoutes }
       <Route path='/404' element={<NotFound />} />
+      <Route path='/admin/*' element={<Admin />} />
     </Routes>
   )
 }

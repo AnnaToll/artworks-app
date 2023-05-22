@@ -2,13 +2,16 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import useFetch from '../hooks/useFetch'
 import type { NavResponse, NavObj } from './Nav.types'
 import useHandleLocation from '../hooks/useHandleLocation'
+import useAuthenticate from '../hooks/useAuthenticate'
 
 const NavContext = createContext<NavObj[]>([])
+const AuthContext = createContext(false)
 
 export const AppProvider = ({ children }: { children: JSX.Element[] | JSX.Element }) => {
   const { data: nav, fetchGet } = useFetch('/nav')
   const [navContext, setNavContext] = useState<NavObj[]>([])
   const { toPathString } = useHandleLocation()
+  const { loggedIn } = useAuthenticate()
 
   useEffect(() => {
     fetchGet()
@@ -51,16 +54,21 @@ export const AppProvider = ({ children }: { children: JSX.Element[] | JSX.Elemen
   }, [nav])
 
   return (
-    <NavContext.Provider value={navContext}>
-      { children }
-    </NavContext.Provider>
+    <AuthContext.Provider value={loggedIn}>
+      <NavContext.Provider value={navContext}>
+        { children }
+      </NavContext.Provider>
+    </AuthContext.Provider>
 
   )
 }
 
+export const useIsLoggedIn = () => {
+  return useContext(AuthContext)
+}
+
 const useGetNavObj = () => {
-  const navObj = useContext(NavContext)
-  return navObj
+  return useContext(NavContext)
 }
 
 export default useGetNavObj

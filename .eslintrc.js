@@ -22,6 +22,7 @@ module.exports = {
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/prefer-nullish-coalescing': 'off',
     '@typescript-eslint/prefer-optional-chain': 'off',
-    'prefer-regex-literals': 'off'
+    'prefer-regex-literals': 'off',
+    '@typescript-eslint/no-confusing-void-expression': 'off'
   }
 }

@@ -23,7 +23,7 @@ const Nav = () => {
   }
 
   return (
-    <nav id={isOpen ? 'nav-open' : 'nav-closed'}>
+    <nav id={isOpen ? 'nav-open' : 'nav-closed'} aria-label='Huvudmeny'>
       <button aria-expanded={isOpen} onClick={handleClick}>
         <i className={`bi bi-${isOpen ? 'x-lg' : 'list'}`} />
         <span className='visually-hidden'>{isOpen ? 'Öppna meny' : 'Stäng meny'}</span>

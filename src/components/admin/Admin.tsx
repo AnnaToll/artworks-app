@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
-import Main from '../containers/MainContainer'
+// import Main from '../containers/MainContainer'
 import Login from './Login'
-import Edit from './Edit'
+import AdminRoutes from './AdminRoutes'
 
 const Admin = () => {
 //   const loggedIn = localStorage.getItem('token')
@@ -11,12 +11,12 @@ const Admin = () => {
   //   }
 
   return (
-    <Main title='admin'>
+    <div>
       <Routes>
         <Route path='logga-in' element={<Login />} />
-        <Route path='redigera' element={<Edit />} />
+        <Route path='redigera' element={<AdminRoutes />} />
       </Routes>
-    </Main>
+    </div>
   )
 }
 

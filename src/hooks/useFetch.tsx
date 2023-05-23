@@ -76,7 +76,7 @@ const useFetch = (urlEndPoint: string, dataInitState: ResponseTypes = []) => {
     baseFetch('POST', body)
   }
 
-  const fetchPut = (body: Record<string, unknown>) => {
+  const fetchPut = (body: Record<string, unknown> = {}) => {
     baseFetch('PUT', body)
   }
 

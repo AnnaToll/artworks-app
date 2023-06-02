@@ -76,8 +76,6 @@ const useFetch = (urlEndPoint: string, dataInitState: ResponseTypes = [], onSucc
         credentials: 'include',
         headers: {
           // ...(csrftoken && { 'X-CSRFToken': csrftoken }),
-          Origin: 'http://gunilla-arno-toll.se',
-          Host: 'gunilla-arno-toll.se',
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },

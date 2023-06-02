@@ -109,7 +109,7 @@ const AdminArt = () => {
       </div>
       { artwork.image
         ? (
-          <div className='mt-3'>
+          <div className='mt-3 admin-img-container'>
             <label>Nuvarande bild:</label>
             <img src={artwork.image} alt={artwork.name}/>
           </div>)

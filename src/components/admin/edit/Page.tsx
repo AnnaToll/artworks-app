@@ -198,7 +198,7 @@ const Page = () => {
       </div>
       { page.banner
         ? (
-          <div className='mt-3'>
+          <div className='mt-3 admin-img-container'>
             <label>Nuvarande banner:</label>
             <img src={page.banner} alt={`Banner för ${page.name}`}/>
           </div>)
@@ -215,7 +215,7 @@ const Page = () => {
               </div>
               { page.pageImg
                 ? (
-                  <div className='mt-3'>
+                  <div className='mt-3 admin-img-container'>
                     <label>Nuvarande bild:</label>
                     <img src={page.pageImg} alt={`Bild för ${page.name}`}/>
                   </div>)

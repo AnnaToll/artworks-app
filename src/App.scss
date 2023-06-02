@@ -318,11 +318,11 @@ main {
   position: absolute;
   overflow: hidden;
   clip: rect(0 0 0 0);
-  height: 1;
-  width: 1;
-  margin: -1;
-  padding: 0;
-  border: 0;
+  height: 1px;
+  width: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
 }
 
 #to-main-content {
@@ -458,10 +458,13 @@ main {
     }
   }
 
-
-  img {
+  .admin-img-container {
     max-width: 400px;
     margin-bottom: spacing(3);
+  }
+  
+  img {
+    width: 100%;
   }
 
   .check-boxes-container {
@@ -575,7 +578,7 @@ main {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -600,26 +603,24 @@ main {
 }
 
 #images-section-container {
-  display: grid;
-  grid-template-rows: 60px auto 60px;
   flex-basis: 650px;
   padding: 40px 60px;
   background-color: white;
-  height: 500px;
   max-height: 90vh;
 
   #images-container {
-    display: grid;
-    align-self: start;
-    grid-template-columns: repeat(5, 1fr);
-    justify-content: space-between;
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
     margin-bottom: spacing(5);
     align-self: start;
     overflow-y: scroll;
+    max-height: 270px;
 
     div {
       position: relative;
+      flex-basis: 100px;
+
     }
 
     .bi {

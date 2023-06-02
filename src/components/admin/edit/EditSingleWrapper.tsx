@@ -1,59 +1,65 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import useFetch from '../../../hooks/useFetch'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Headline from '../../Headline'
+import Error from '../../features/Error'
+import useModal from '../../../hooks/useModal'
+import useAdminData from '../../../context/DataContext'
 
 interface EditSingleWrapperProps {
   headline: string
   itemData: any
-  updateItemData: any
   endpoint: string
   navigateUrl: string
   children: JSX.Element | JSX.Element[]
 }
 
-const EditSingleWrapper = ({ headline, itemData, updateItemData, endpoint, navigateUrl, children }: EditSingleWrapperProps) => {
+const EditSingleWrapper = ({ headline, itemData, endpoint, navigateUrl, children }: EditSingleWrapperProps) => {
   const { id } = useParams()
-  const navigate = useNavigate()
-  const { data: categoryRes, fetchDelete } = useFetch(endpoint)
-  const { data: actionRes, fetchPut, fetchPost, fetchGet } = useFetch(endpoint, { success: false })
-  const [fetchMethod, setFetchMethod] = useState<(body?: Record<string, unknown>) => void>(fetchPost)
+  const { ModalConfirm, hasConfirmed, openModal } = useModal()
+  const { fetchData } = useAdminData(navigateUrl)
+  const { data: actionRes, error: actionError, fetchPut, fetchPost, fetchDelete } = useFetch(`${endpoint}/${id}`, false)
+  const isCreateNew = id === 'skapa-ny'
 
   useEffect(() => {
-    if (id !== 'create-new' || id !== undefined) {
-      fetchGet()
-      setFetchMethod(fetchPut)
-    }
-  }, [id])
-
-  useEffect(() => {
-    updateItemData(categoryRes)
-  }, [categoryRes])
-
-  useEffect(() => {
-    if (actionRes.success) {
-      navigate(navigateUrl)
+    if (actionRes) {
+      fetchData()
     }
   }, [actionRes])
 
-  const handleSave = () => {
-    fetchMethod(itemData)
+  useEffect(() => {
+    if (hasConfirmed) {
+      fetchDelete()
+    }
+  }, [hasConfirmed])
+
+  const handleSave = async () => {
+    if (isCreateNew) {
+      fetchPost(itemData)
+    } else if (id !== undefined) {
+      fetchPut(itemData)
+    }
   }
 
   const handleDelete = () => {
-    fetchDelete({ id: itemData.id })
+    openModal(`Är du säker på att du vill radera "${headline}"?`)
   }
 
   return (
-    <main>
+    <main className='admin-main'>
+      <ModalConfirm />
       <Headline headline={headline} />
-      <form>
-        <button onClick={handleSave}>Spara</button>
-        { itemData.id && (
-          <button onClick={handleDelete}>
-              Radera
-          </button>
-        )}
+      <button onClick={handleSave} className='btn bg-blue'>
+        <span>{isCreateNew ? 'Spara' : 'Uppdatera'}</span>
+      </button>
+      { itemData.id && (
+        <button onClick={handleDelete} className='btn bg-red'>
+          <i className="bi bi-trash3"></i>
+          <span>Radera</span>
+        </button>
+      )}
+      <Error error={actionError} />
+      <form className='edit-single-form'>
         { children }
       </form>
     </main>

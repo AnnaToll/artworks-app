@@ -23,6 +23,8 @@ module.exports = {
     '@typescript-eslint/prefer-nullish-coalescing': 'off',
     '@typescript-eslint/prefer-optional-chain': 'off',
     'prefer-regex-literals': 'off',
-    '@typescript-eslint/no-confusing-void-expression': 'off'
+    '@typescript-eslint/no-confusing-void-expression': 'off',
+    '@typescript-eslint/no-misused-promises': 'off',
+    'no-return-assign': 'off'
   }
 }

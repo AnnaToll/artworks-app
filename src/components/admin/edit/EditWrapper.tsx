@@ -1,20 +1,30 @@
-import Main from '../../containers/MainContainer'
+// import Main from '../../containers/MainContainer'
 import Headline from '../../Headline'
+import { useNavigate } from 'react-router-dom'
+import List from './List'
+import type { BaseObj } from '../../../context/DataContext'
 
 interface EditWrapperProps {
-  title: string
   headline: string
-  children: JSX.Element | JSX.Element[]
+  endpoint: string
+  state: BaseObj
 }
 
-const EditWrapper = ({ title, headline, children }: EditWrapperProps) => {
+const EditWrapper = ({ headline, endpoint, state }: EditWrapperProps) => {
+  const navigate = useNavigate()
+
+  const handleClickAdd = () => {
+    navigate('skapa-ny')
+  }
+
   return (
-    <Main title={title}>
+    <main className='admin-main'>
       <section className='edit-container'>
         <Headline headline={headline} />
-        { children }
+        <button onClick={handleClickAdd} className='btn bg-blue'><i className="bi bi-plus"></i><span>Lägg till ny</span></button>
+        <List list={state.data} endpoint={endpoint} />
       </section>
-    </Main>
+    </main>
   )
 }
 

@@ -4,20 +4,17 @@ import Banner from '../Banner'
 import Main from '../containers/MainContainer'
 
 const TextPage = ({ data }: { data: NavObj }) => {
-  const text = data.text.split('%%').map((p, index) => (
-    <p key={index}>{p}</p>
-  ))
   return (
     <>
       <Banner data={data} />
       <Main data={data}>
         <section className='text-page-container'>
           { data.page_img && (
-            <img className="text-page-image" src={data.page_img} alt={`${data.name}-image`}/>
+            <div className='text-page-image-container'><img className="text-page-image" src={data.page_img} alt={`${data.name}-image`}/></div>
           )}
-          <div>
+          <div className='text-page-content-container'>
             <Headline headline={data.name} />
-            <p>{text}</p>
+            <div dangerouslySetInnerHTML={{ __html: data.text }} className='text-page-text' />
           </div>
         </section>
       </Main>

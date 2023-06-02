@@ -9,6 +9,7 @@ import Main from '../containers/MainContainer'
 interface Category {
   id: number
   category: string
+  priority: number
 }
 
 const Home = ({ data }: { data: NavObj }) => {
@@ -23,9 +24,11 @@ const Home = ({ data }: { data: NavObj }) => {
       { error }
       <Main data={data}>
         { categories.map((category: Category) => (
-          <ListContainer key={category.id} headline={category.category}>
-            <Artworks id={category.id} />
-          </ListContainer>
+          <>
+            {category.priority && <ListContainer key={category.id} headline={category.category}>
+              <Artworks id={category.id} />
+            </ListContainer>}
+          </>
         ))}
       </Main>
     </>

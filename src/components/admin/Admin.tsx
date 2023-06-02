@@ -14,7 +14,7 @@ const Admin = () => {
     <div>
       <Routes>
         <Route path='logga-in' element={<Login />} />
-        <Route path='redigera' element={<AdminRoutes />} />
+        <Route path='redigera/*' element={<AdminRoutes />} />
       </Routes>
     </div>
   )

@@ -3,6 +3,7 @@ import useFetch from '../hooks/useFetch'
 import type { NavResponse, NavObj } from './Nav.types'
 import useHandleLocation from '../hooks/useHandleLocation'
 import useAuthenticate from '../hooks/useAuthenticate'
+import { AdminProvider } from './DataContext'
 
 const NavContext = createContext<NavObj[]>([])
 const AuthContext = createContext(false)
@@ -19,7 +20,6 @@ export const AppProvider = ({ children }: { children: JSX.Element[] | JSX.Elemen
 
   useEffect(() => {
     if (nav) {
-      console.log(nav)
       const newNavArr: NavObj[] = []
       nav.forEach((navItem: NavResponse) => {
         const newNavObj: NavObj = {
@@ -56,7 +56,9 @@ export const AppProvider = ({ children }: { children: JSX.Element[] | JSX.Elemen
   return (
     <AuthContext.Provider value={loggedIn}>
       <NavContext.Provider value={navContext}>
-        { children }
+        <AdminProvider>
+          { children }
+        </AdminProvider>
       </NavContext.Provider>
     </AuthContext.Provider>
 

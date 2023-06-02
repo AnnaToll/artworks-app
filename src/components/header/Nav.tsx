@@ -14,6 +14,10 @@ const Nav = () => {
     setIsOpen(!isOpen)
   }
 
+  const handleClickLink = () => {
+    setIsOpen(false)
+  }
+
   const handleClickLogout = () => {
     fetchPost()
   }
@@ -23,26 +27,26 @@ const Nav = () => {
   }
 
   return (
-    <nav id={isOpen ? 'nav-open' : 'nav-closed'} aria-label='Huvudmeny'>
+    <nav id={isOpen ? 'nav-open' : 'nav-closed'} className='main-nav' aria-label='Huvudmeny'>
       <button aria-expanded={isOpen} onClick={handleClick}>
         <i className={`bi bi-${isOpen ? 'x-lg' : 'list'}`} />
         <span className='visually-hidden'>{isOpen ? 'Öppna meny' : 'Stäng meny'}</span>
       </button>
       <ul className="nav-links" id={isOpen ? 'nav-links-open' : 'nav-links-closed'}>
         { nav.map((navItem: NavObj) => (
-          <li key={navItem.order}>
+          <li key={navItem.order} onClick={handleClickLink}>
             <Link to={navItem.endpoint}>{navItem.name}</Link>
           </li>
         ))}
         { loggedIn && (
           <>
-            <li>
+            <li onClick={handleClickLink}>
               <Link to="/admin/redigera">Admin</Link>
             </li>
-            <li>
+            <li onClick={handleClickLink}>
               <button onClick={handleClickLogout}>Logga ut</button>
             </li>
-            <li>
+            <li onClick={handleClickLink}>
               <button onClick={test}>Test</button>
             </li>
           </>

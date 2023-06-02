@@ -7,7 +7,7 @@ export interface CategoryResponse {
 export interface ArtResponse {
   id: number
   title: string
-  category_id: number
+  category: string[]
   image: string
   year: number
 }

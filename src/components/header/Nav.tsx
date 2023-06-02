@@ -8,6 +8,7 @@ const Nav = () => {
   const nav = useGetNavObj()
   const loggedIn = useIsLoggedIn()
   const { fetchPost } = useFetch('/logout')
+  const { fetchGet } = useFetch('/authenticate')
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClick = () => {
@@ -23,7 +24,7 @@ const Nav = () => {
   }
 
   const test = () => {
-    console.log(document.cookie)
+    fetchGet()
   }
 
   return (

@@ -62,25 +62,17 @@ const useFetch = (urlEndPoint: string, dataInitState: ResponseTypes = [], onSucc
     setIsLoading(true)
     setError('')
 
-    if (method === 'PUT') {
-      console.log(body)
-    }
-
-    let fetchSettings = {}
-
-    if (method !== 'GET') {
-      // const csrftoken = getCookie('csrftoken')
-
-      fetchSettings = {
-        method,
-        credentials: 'include',
+    const fetchSettings: any = {
+      method,
+      credentials: 'include',
+      ...(method !== 'GET' && {
         headers: {
-          // ...(csrftoken && { 'X-CSRFToken': csrftoken }),
+        // ...(csrftoken && { 'X-CSRFToken': csrftoken }),
           Accept: 'application/json',
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-      }
+        }
+      }),
+      ...(method !== 'GET' && { body: JSON.stringify(body) })
     }
 
     if (urlEndPoint === '/all') {
@@ -91,6 +83,9 @@ const useFetch = (urlEndPoint: string, dataInitState: ResponseTypes = [], onSucc
       const res = await fetch(`${process.env.REACT_APP_SERVER_URL}${urlEndPoint}`, fetchSettings)
       // console.log(res)
       const data: DataObj = await res.json()
+      if (urlEndPoint === '/authenticate') {
+        console.log(data)
+      }
       if (data.error) {
         setError(data.error)
       } else if (data.success) {

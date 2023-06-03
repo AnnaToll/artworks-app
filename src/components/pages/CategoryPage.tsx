@@ -8,6 +8,7 @@ const CategoryPage = ({ data }: { data: NavObj }) => {
   return (
     <Main data={data}>
       <Headline headline={data.name} />
+      <div dangerouslySetInnerHTML={{ __html: data.text }} className='text-page-text' />
       <Artworks id={data.id} />
     </Main>
   )

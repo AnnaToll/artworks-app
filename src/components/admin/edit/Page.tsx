@@ -17,7 +17,7 @@ const Page = () => {
   const [page, setPage] = useState<PageObj>({
     id: null,
     name: '',
-    pageType: '',
+    pageType: pageTypes[0].pageType,
     pageImg: '',
     banner: '',
     text: '',

@@ -1,19 +1,25 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import useFetch from './useFetch'
 
 const useAuthenticate = () => {
-  const { data, fetchGet } = useFetch('/authenticate', { isAuthenticated: false })
-  const loggedIn = true
+  const { data, fetchGet } = useFetch('/authenticate', false)
+  const [loggedIn, setLoggedIn] = useState<null | boolean>(null)
 
   useEffect(() => {
     fetchGet()
   }, [])
 
   useEffect(() => {
-    // console.log(data)
+    if (data) {
+      if (data.isAuthenticated) {
+        setLoggedIn(true)
+      } else {
+        setLoggedIn(false)
+      }
+    }
   }, [data])
 
-  return { loggedIn }
+  return { loggedIn, setLoggedIn }
 }
 
 export default useAuthenticate

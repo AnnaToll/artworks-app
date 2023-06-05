@@ -164,6 +164,12 @@ header {
       display: flex;
       flex-direction: column;
       row-gap: spacing(3);
+      
+      button {
+        position: relative;
+        left: 0px;
+        top: spacing(1)
+      }
     }
 
   }
@@ -530,7 +536,7 @@ main {
 }
 
 .bg-blue {
-  background-color: $blue;
+  background-color: $blue !important;
   &:hover {
     color: $yellow;
   }
@@ -548,14 +554,14 @@ main {
 }
 
 .btn-s {
-  padding: 0 17px;
+  padding: 0 17px !important;
   font-size: 13px;
   font-weight: 500;
   .bi {
     font-size: 13px;
   }
   span {
-    padding: 12px 0;
+    padding: 12px 0 !important;
   }
 }
 
@@ -638,5 +644,13 @@ main {
     .image-selected {
       outline: solid 3px $blue;
     }
+  }
+}
+
+.login-form {
+  input {
+    @extend .input-base;
+    max-width: 500px;
+    display: block;
   }
 }

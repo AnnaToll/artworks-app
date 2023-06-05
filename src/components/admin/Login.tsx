@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
 import useFetch from '../../hooks/useFetch'
 import Error from '../features/Error'
+import { useNavigate } from 'react-router-dom'
+import { useIsLoggedIn } from '../../context/AppContext'
 
 const Login = () => {
+  const navigate = useNavigate()
   const { fetchPost, data, error } = useFetch('/login', null)
+  const auth = useIsLoggedIn()
   const [userData, setUserData] = useState({
     email: '',
     pwd: ''
@@ -19,8 +23,6 @@ const Login = () => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
-    console.log('post:')
-    console.log(userData)
     fetchPost(userData)
   }
 
@@ -28,16 +30,16 @@ const Login = () => {
     console.log(error)
     console.log(data)
     if (data) {
-      console.log(data)
-      localStorage.setItem('token', JSON.stringify(data))
+      navigate('/admin')
+      auth.setLoggedIn(true)
     }
   }, [data, error])
 
   return (
-    <section>
+    <main>
       <h2>Logga in</h2>
       <Error error={error} />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='login-form'>
         <input
           autoComplete='email'
           type="email"
@@ -51,9 +53,11 @@ const Login = () => {
           value={userData.pwd}
           onChange={handleChange}
         />
-        <button>Logga in</button>
+        <button className='btn-blue'>
+          <span>Logga in</span>
+        </button>
       </form>
-    </section>
+    </main>
   )
 }
 

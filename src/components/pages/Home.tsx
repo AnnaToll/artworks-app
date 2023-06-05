@@ -10,6 +10,7 @@ interface Category {
   id: number
   category: string
   priority: number
+  text: string
 }
 
 const Home = ({ data }: { data: NavObj }) => {
@@ -26,6 +27,7 @@ const Home = ({ data }: { data: NavObj }) => {
         { categories.map((category: Category) => (
           <>
             {category.priority && <ListContainer key={category.id} headline={category.category}>
+              { category.text ? <div dangerouslySetInnerHTML={{ __html: category.text }} className='text-page-text mb-4' /> : <></> }
               <Artworks id={category.id} />
             </ListContainer>}
           </>

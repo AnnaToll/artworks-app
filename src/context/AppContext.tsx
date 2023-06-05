@@ -6,13 +6,13 @@ import useAuthenticate from '../hooks/useAuthenticate'
 import { AdminProvider } from './DataContext'
 
 const NavContext = createContext<NavObj[]>([])
-const AuthContext = createContext(false)
+const AuthContext = createContext<any>({ loggedIn: null })
 
 export const AppProvider = ({ children }: { children: JSX.Element[] | JSX.Element }) => {
   const { data: nav, fetchGet } = useFetch('/nav')
   const [navContext, setNavContext] = useState<NavObj[]>([])
   const { toPathString } = useHandleLocation()
-  const { loggedIn } = useAuthenticate()
+  const { loggedIn, setLoggedIn } = useAuthenticate()
 
   useEffect(() => {
     fetchGet()
@@ -26,7 +26,7 @@ export const AppProvider = ({ children }: { children: JSX.Element[] | JSX.Elemen
           name: '',
           endpoint: '/',
           type: 'Text page',
-          text: '',
+          text: navItem.text || '',
           banner: '',
           page_img: '',
           id: navItem.id,
@@ -40,7 +40,6 @@ export const AppProvider = ({ children }: { children: JSX.Element[] | JSX.Elemen
         } else if (navItem.page && navItem.page_type_id) {
           newNavObj.name = navItem.page
           newNavObj.type = navItem.page_type_id
-          newNavObj.text = navItem.text
           newNavObj.banner = navItem.banner || ''
           newNavObj.page_img = navItem.page_img || ''
         }
@@ -54,7 +53,7 @@ export const AppProvider = ({ children }: { children: JSX.Element[] | JSX.Elemen
   }, [nav])
 
   return (
-    <AuthContext.Provider value={loggedIn}>
+    <AuthContext.Provider value={{ loggedIn, setLoggedIn }}>
       <NavContext.Provider value={navContext}>
         <AdminProvider>
           { children }

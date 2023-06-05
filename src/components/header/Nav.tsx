@@ -6,9 +6,8 @@ import useFetch from '../../hooks/useFetch'
 
 const Nav = () => {
   const nav = useGetNavObj()
-  const loggedIn = useIsLoggedIn()
+  const auth = useIsLoggedIn()
   const { fetchPost } = useFetch('/logout')
-  const { fetchGet } = useFetch('/authenticate')
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClick = () => {
@@ -23,10 +22,6 @@ const Nav = () => {
     fetchPost()
   }
 
-  const test = () => {
-    fetchGet()
-  }
-
   return (
     <nav id={isOpen ? 'nav-open' : 'nav-closed'} className='main-nav' aria-label='Huvudmeny'>
       <button aria-expanded={isOpen} onClick={handleClick}>
@@ -39,16 +34,13 @@ const Nav = () => {
             <Link to={navItem.endpoint}>{navItem.name}</Link>
           </li>
         ))}
-        { loggedIn && (
+        { auth.loggedIn && (
           <>
             <li onClick={handleClickLink}>
-              <Link to="/admin/redigera">Admin</Link>
+              <Link to="/admin">Admin</Link>
             </li>
             <li onClick={handleClickLink}>
-              <button onClick={handleClickLogout}>Logga ut</button>
-            </li>
-            <li onClick={handleClickLink}>
-              <button onClick={test}>Test</button>
+              <button onClick={handleClickLogout} className='btn-blue-s'><span>Logga ut</span></button>
             </li>
           </>
         )}

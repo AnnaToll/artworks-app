@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link, Navigate } from 'react-router-dom'
 import Category from './edit/Category'
 import AdminArt from './edit/AdminArt'
 import Page from './edit/Page'
@@ -6,13 +6,19 @@ import EditNav from './edit/EditNav'
 import EditWrapper from './edit/EditWrapper'
 import useAdminData from '../../context/DataContext'
 import { useEffect } from 'react'
+import { useIsLoggedIn } from '../../context/AppContext'
 
 const AdminRoutes = () => {
   const { fetchData, state } = useAdminData()
+  const auth = useIsLoggedIn()
 
   useEffect(() => {
     fetchData()
   }, [])
+
+  if (!auth.loggedIn && auth.loggedIn !== null) {
+    return <Navigate to="logga-in" replace />
+  }
 
   return (
     <div id="admin-edit-container">

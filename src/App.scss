@@ -97,6 +97,10 @@ button {
   align-items: center;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .mt-2 {
   margin-top: spacing(2);
 }
@@ -127,6 +131,12 @@ button {
 
 .mb-6 {
   margin-bottom: spacing(6);
+}
+
+.loading-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 header {
@@ -176,7 +186,34 @@ header {
 }
 
 #logo {
+
+  display: flex;
+  // flex-direction: column;
+  column-gap: spacing(2);
+  align-items: center;
+
+  div {
+    // position: relative;
+    // bottom: 8px;
+    max-width: 61px;
+    border: 2px solid gray;
+    // border-left: 1px solid gray;
+    padding: 7px 12px;
+    // padding-left: 12px;
+    // padding-bottom: 7px;
+    // rotate: 270deg;
+
+    img {
+      position: relative;
+      top: 2px;
+      left: 3px;
+      width: 100%;
+      opacity: 0.9;
+    }
+  }
   a {
+    position: relative;
+    bottom: 7px;
     font-size: 18px;
     font-weight: 500;
     text-transform: uppercase;
@@ -222,6 +259,8 @@ header {
 main {
   @include window_padding();
   flex-grow: 1;
+  // max-width: 1200px;
+  // margin: 0 auto;
 }
 
 .base-headline-container {
@@ -282,6 +321,8 @@ main {
 
 .artworks {
   display: grid;
+  max-width: 1170px;
+  margin: 0 auto;
   grid-template-columns: repeat(3, 1fr);
   @include media($media-m) {
     grid-template-columns: repeat(2, 1fr);

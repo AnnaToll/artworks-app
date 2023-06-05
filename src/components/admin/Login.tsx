@@ -27,13 +27,16 @@ const Login = () => {
   }
 
   useEffect(() => {
-    console.log(error)
-    console.log(data)
     if (data) {
-      navigate('/admin')
       auth.setLoggedIn(true)
     }
   }, [data, error])
+
+  useEffect(() => {
+    if (auth.loggedIn) {
+      navigate('/admin')
+    }
+  }, [auth.loggedIn])
 
   return (
     <main>

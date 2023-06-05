@@ -20,6 +20,7 @@ const Nav = () => {
 
   const handleClickLogout = () => {
     fetchPost()
+    auth.setLoggedIn(false)
   }
 
   return (

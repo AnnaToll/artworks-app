@@ -7,6 +7,7 @@ import EditWrapper from './edit/EditWrapper'
 import useAdminData from '../../context/DataContext'
 import { useEffect } from 'react'
 import { useIsLoggedIn } from '../../context/AppContext'
+import Docs from './Docs'
 
 const AdminRoutes = () => {
   const { fetchData, state } = useAdminData()
@@ -32,6 +33,7 @@ const AdminRoutes = () => {
         </ul>
       </nav>
       <Routes>
+        <Route path='/' element={< Docs />} />
         <Route path='sidor/:id' element={< Page />} />
         <Route path='sidor/*' element={
           <EditWrapper

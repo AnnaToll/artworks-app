@@ -254,6 +254,12 @@ header {
   .nav-links {
     display: flex;
     column-gap: spacing(6);
+
+    button {
+      position: relative;
+      bottom: 9px;
+
+    }
   }
 }
 
@@ -673,6 +679,7 @@ main {
     margin-bottom: spacing(5);
     align-self: start;
     overflow-y: scroll;
+    overflow-anchor: none;
     max-height: 270px;
 
     div {
@@ -739,4 +746,27 @@ main {
   margin-bottom: spacing(6);
   color: rgb(68, 68, 68);
   line-height: 1.6;
+}
+
+.documentation-container {
+
+  h1 {
+    font-size: 28px;
+  }
+
+  section {
+    margin-bottom: spacing(7);
+  }
+
+  h2 {
+    font-size: 18px;
+    margin-bottom: spacing(4);
+  }
+
+  p {
+    font-size: 15px;
+    margin-bottom: spacing(2);
+    line-height: 1.6;
+    max-width: 800px;
+  }
 }

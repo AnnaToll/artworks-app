@@ -47,7 +47,7 @@ const Category = () => {
       headline={category.category}
       itemData={category}
       endpoint='/category'
-      navigateUrl='/admin/redigera/kategorier'
+      navigateUrl='/admin/kategorier'
     >
       <label htmlFor="category-name">Namn på kategori:</label>
       <input type='text' id='category-name' value={category.category} onChange={handleChange} />

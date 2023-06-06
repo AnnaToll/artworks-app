@@ -78,7 +78,7 @@ const AdminArt = () => {
       headline={artwork.name}
       itemData={artwork}
       endpoint='/artwork'
-      navigateUrl='/admin/redigera/konstverk'
+      navigateUrl='/admin/konstverk'
     >
       <ImagePicker />
       <label htmlFor="artwork-name">Namn på konstverk:</label>

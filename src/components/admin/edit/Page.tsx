@@ -145,7 +145,7 @@ const Page = () => {
       headline={page.name}
       itemData={page}
       endpoint='/page'
-      navigateUrl='/admin/redigera/sidor'
+      navigateUrl='/admin/sidor'
     >
       <ImagePicker />
       <label htmlFor="page-name">Namn på sidan:</label>

@@ -8,7 +8,7 @@ const CategoryPage = ({ data }: { data: NavObj }) => {
   return (
     <Main data={data}>
       <Headline headline={data.name} isCentered={true} />
-      <div dangerouslySetInnerHTML={{ __html: data.text }} className='text-page-text mb-4 text-center' />
+      <div dangerouslySetInnerHTML={{ __html: data.text }} className='category-text' />
       <Artworks id={data.id} />
     </Main>
   )

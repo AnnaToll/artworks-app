@@ -7,11 +7,14 @@ Node
 (Node version used in project: 16.13.1)
 
 ## Commands
+```
+cd <your-workspace> 
 git clone https://github.com/AnnaToll/artworks-app.git
 cd artworks-app
 touch .env
 npm install
 npm start
+```
 
 ## Env variables
 Add the following env variables to .env:

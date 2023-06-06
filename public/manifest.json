@@ -1,7 +1,7 @@
 {
   "short_name": "Måleri",
   "name": "Mitt konstgalleri",
-  "start_url": ".",
+  "start_url": "./admin",
   "display": "standalone",
   "theme_color": "#eebd39",
   "background_color": "#4af0bb",
